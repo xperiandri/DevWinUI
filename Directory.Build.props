@@ -67,7 +67,7 @@
     
     <!-- TargetFramework version -->
     <DebugTargetFramework>net10.0-windows10.0.19041.0</DebugTargetFramework>
-    <DebugShaderAndGalleryTargetFramework>net10.0-windows10.0.26100.0</DebugShaderAndGalleryTargetFramework>
+    <DebugShaderAndGalleryTargetFramework>net10.0-windows10.0.28000.0</DebugShaderAndGalleryTargetFramework>
 
     <GalleryTargetFramework>$(DebugShaderAndGalleryTargetFramework)</GalleryTargetFramework>
 
@@ -82,6 +82,16 @@
     <UseWinUI Condition="'$(MSBuildProjectName)' != $(ContextMenuLibName)">true</UseWinUI>
     <WinUISDKReferences Condition="'$(MSBuildProjectName)' != $(ContextMenuLibName)">false</WinUISDKReferences>
 
+  </PropertyGroup>
+
+  <!--
+    The .NET SDK does not know Windows SDK 10.0.28000 yet (dotnet/sdk#55834) and rejects the target framework with NETSDK1140.
+    The preview projection is the workaround of the SDK maintainers. Only the Gallery and the Debug build of the Shader target 28000;
+    the packed libraries keep 19041 and 22621. Remove this group once the .NET SDK accepts 10.0.28000.
+  -->
+  <PropertyGroup Condition=" $(MSBuildProjectName) == $(GalleryAppName) Or ( '$(Configuration)' == 'Debug' And $(MSBuildProjectName) == $(ShaderLibName) ) ">
+    <UseWindowsSDKPreview>true</UseWindowsSDKPreview>
+    <WindowsSdkPackageVersion>10.0.28000.87</WindowsSdkPackageVersion>
   </PropertyGroup>
 
   <!-- The NuGet versions of dependencies to build against. -->
