@@ -31,7 +31,7 @@ Use GitHub MCP tools for code search, and the `Microsoft Learn` server for the d
 
 ## Building
 
-* Build and check in Debug. A Debug build targets only `net10.0-windows10.0.19041.0` (`DevWinUI.Shader` and the Gallery use `net10.0-windows10.0.26100.0`). A Release build targets .NET 8, 9 and 10 and packs the NuGet packages into `Output/` (`GeneratePackageOnBuild`), so do not run it unless the task is about packaging.
+* Build and check in Debug. A Debug build targets only `net10.0-windows10.0.19041.0` (`DevWinUI.Shader` and the Gallery use `net10.0-windows10.0.28000.0`). A Release build targets .NET 8, 9 and 10 and packs the NuGet packages into `Output/` (`GeneratePackageOnBuild`), so do not run it unless the task is about packaging.
 * Always pass `-c Debug` (or `-c Release`) to `dotnet build`, and `-p:Configuration=Debug` to `dotnet restore`: `Directory.Build.props` picks the target frameworks by `Configuration`, and without it the project has no target framework (NETSDK1241 or NETSDK1013).
 * `OutputPath` of the libraries is `$(SolutionDir)Output\`. A project that is built alone has an empty `SolutionDir`, and its output lands in an `Output` folder inside the project folder, which git does not ignore. So pass the repository root yourself when you build a project from the command line, and run the command from the repository root:
 
@@ -40,7 +40,8 @@ Use GitHub MCP tools for code search, and the `Microsoft Learn` server for the d
   ```
 
 * The Gallery declares only the platforms `x86`, `x64` and `ARM64`: build it with `-p:Platform=x64`, or from Visual Studio.
-* The Gallery needs the Windows SDK 10.0.26100 itself, not only the NuGet projection (`C:\Program Files (x86)\Windows Kits\10\Platforms\UAP\10.0.26100.0\Platform.xml`). Without it the build stops with `Could not read the Windows SDK's Platform.xml`, and the XAML compiler then adds misleading errors such as `WMC0001 Unknown type 'SampleCodePresenter'` and `WMC9999`. Install the SDK instead of changing the XAML; the library projects do not need it.
+* The Gallery needs the Windows SDK 10.0.28000 itself, not only the NuGet projection (`C:\Program Files (x86)\Windows Kits\10\Platforms\UAP\10.0.28000.0\Platform.xml`). Without it the build stops with `Could not read the Windows SDK's Platform.xml`, and the XAML compiler then adds misleading errors such as `WMC0001 Unknown type 'SampleCodePresenter'` and `WMC9999`. Install the SDK instead of changing the XAML; the library projects do not need it.
+* The .NET SDK does not know Windows SDK 10.0.28000 yet (dotnet/sdk#55834) and rejects it with NETSDK1140. The group with `UseWindowsSDKPreview` and `WindowsSdkPackageVersion` in `Directory.Build.props` is the workaround for the Gallery and the Debug build of `DevWinUI.Shader`: keep it until the SDK accepts 10.0.28000. The GitHub `windows-latest` image has no Windows SDK 10.0.28000, so the Gallery cannot be built there.
 * After you switch between Debug and Release, close Visual Studio and run `Clean-obj-bin.bat`.
 * The versions of the libraries (`LibraryMajorVersion`, `DevWinUI_*_MinorVersion`, `DevWinUI_*_PatchVersion`, `IsPreviewBuild`, `PreviewLabel`) are in `Directory.Build.props`. Do not change them unless the task is a version bump.
 * Do not commit the `ItemGroup` lines (`Removed`, `Included` and so on) that the IDE adds to a `.csproj` file.

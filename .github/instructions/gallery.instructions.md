@@ -6,7 +6,7 @@ applyTo: 'dev/DevWinUI.Gallery/**'
 
 # DevWinUI Gallery
 
-The Gallery (`dev/DevWinUI.Gallery`, namespace `DevWinUIGallery`) shows every control of the libraries. It is a WinUI app for `x86`, `x64` and `ARM64` that targets `net10.0-windows10.0.26100.0` and is published with Native AOT, so the Native AOT rules of `winui.instructions.md` apply to it as well. It references `DevWinUI` and `DevWinUI.Shader` as projects.
+The Gallery (`dev/DevWinUI.Gallery`, namespace `DevWinUIGallery`) shows every control of the libraries. It is a WinUI app for `x86`, `x64` and `ARM64` that targets `net10.0-windows10.0.28000.0` and is published with Native AOT, so the Native AOT rules of `winui.instructions.md` apply to it as well. It references `DevWinUI` and `DevWinUI.Shader` as projects.
 
 ## Adding a sample page
 
