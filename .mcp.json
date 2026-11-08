@@ -1,0 +1,49 @@
+{
+  "servers": {
+    "GitHub": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "MSBuild Log": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": [
+        "tool",
+        "run",
+        "binlog-mcp"
+      ]
+    }
+  },
+  "mcpServers": {
+    "GitHub": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headersHelper": "pwsh -NoProfile -File .claude/scripts/github-mcp-headers.ps1"
+    },
+    "Microsoft Learn": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    },
+    "MSBuild Log": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": [
+        "tool",
+        "run",
+        "binlog-mcp"
+      ]
+    },
+    "nuget": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": [
+        "tool",
+        "run",
+        "nuget-mcp-server",
+        "--source",
+        "https://api.nuget.org/v3/index.json",
+        "--yes"
+      ]
+    }
+  }
+}

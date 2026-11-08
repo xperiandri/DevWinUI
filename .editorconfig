@@ -118,3 +118,7 @@ resharper_unused_method_return_value_local_highlighting=hint
 resharper_unused_parameter_local_highlighting=none
 resharper_use_negated_pattern_matching_highlighting=suggestion
 resharper_xaml_path_error_highlighting=hint
+
+# AI agent files: no BOM. A BOM breaks the YAML front matter and the JSON parsing of the agent tools.
+[{CLAUDE.md,AGENTS.md,.mcp.json,skills-lock.json,.config/dotnet-tools.json,.claude/**,.github/copilot-instructions.md,.github/instructions/**,.github/skills/**}]
+charset=utf-8

@@ -399,3 +399,6 @@ FodyWeavers.xsd
 # output folder
 /output/
 /src/output/
+
+# Local link to .github/skills for Claude Code (created per machine by .claude/scripts/Link-ClaudeSkills.ps1)
+/.claude/skills

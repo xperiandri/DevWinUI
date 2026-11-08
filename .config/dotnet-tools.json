@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "microsoft.aitools.binlogmcp": {
+      "version": "3.0.4",
+      "commands": [
+        "binlog-mcp"
+      ],
+      "rollForward": true
+    },
+    "nuget.mcp.server": {
+      "version": "1.4.23",
+      "commands": [
+        "nuget-mcp-server"
+      ],
+      "rollForward": true
+    }
+  }
+}
